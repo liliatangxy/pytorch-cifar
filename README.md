@@ -47,4 +47,4 @@ By default the output is not saved to a file.
 When training the model, have the output written to `log/<name>-<batch_size>`,
 where `<name>` will be used in the title of the produced graph.
 
-The batch sizes used in the graph are specified in `batch_no`.
+The batch sizes used in the graph are specified in the `batch_no` variable.
