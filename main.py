@@ -13,6 +13,8 @@ import torchvision.transforms as transforms
 import os
 import argparse
 
+import time
+
 from models import *
 from utils import progress_bar
 
@@ -25,6 +27,9 @@ args = parser.parse_args()
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 best_acc = 0  # best test accuracy
 start_epoch = 0  # start from epoch 0 or last checkpoint epoch
+
+forward_time = []
+backward_time = []
 
 # Data
 print('==> Preparing data..')
@@ -88,9 +93,23 @@ def train(epoch):
     for batch_idx, (inputs, targets) in enumerate(trainloader):
         inputs, targets = inputs.to(device), targets.to(device)
         optimizer.zero_grad()
+
+        start_time = time.time()
         outputs = net(inputs)
+        end_time = time.time()
+        time_taken = end_time - start_time
+        print("Forward time: %g" %(time_taken))
+        forward_time.append(time_taken)
+
         loss = criterion(outputs, targets)
+
+        start_time = time.time()
         loss.backward()
+        end_time = time.time()
+        time_taken = end_time - start_time
+        print("Backward time: %g" %(time_taken))
+        backward_time.append(time_taken)
+
         optimizer.step()
 
         train_loss += loss.item()
@@ -139,3 +158,6 @@ def test(epoch):
 for epoch in range(start_epoch, start_epoch+200):
     train(epoch)
     test(epoch)
+
+"average forward time per epoch:{}".format(sum(forward_time)/float(len(forward_time)))
+"average backward time per epoch:{}".format(sum(backward_time)/float(len(backward_time)))

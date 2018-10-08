@@ -33,3 +33,18 @@ I manually change the `lr` during training:
 - `0.001` for epoch `[250,350)`
 
 Resume the training with `python main.py --resume --lr=0.01`
+
+## Training the model
+Execute `python main.py`.
+
+Specify batch sizes by using `-b <batch_size>`
+
+By default the output is not saved to a file.
+
+## Making Time Graphs with Varying Batch Sizes
+`python compare_batches.py <name>`
+
+When training the model, have the output written to `log/<name>-<batch_size>`,
+where `<name>` will be used in the title of the produced graph.
+
+The batch sizes used in the graph are specified in `batch_no`.
