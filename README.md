@@ -41,7 +41,7 @@ Specify batch sizes by using `-b <batch_size>`
 
 By default the output is not saved to a file.
 
-## Making Time Graphs with Varying Batch Sizes
+## Making time graphs with varying batch sizes
 `python compare_batches.py <name>`
 
 When training the model, have the output written to `log/<name>-<batch_size>`,
