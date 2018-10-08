@@ -35,7 +35,7 @@ I manually change the `lr` during training:
 Resume the training with `python main.py --resume --lr=0.01`
 
 ## Training the model
-`python main.py`.
+`python main.py`
 
 Specify a batch size by using `-b <batch_size>`. By default it is `128`.
 
